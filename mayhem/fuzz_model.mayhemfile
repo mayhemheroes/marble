@@ -1,0 +1,7 @@
+project: marble
+target: fuzz-model
+
+cmds:
+  - cmd: /fuzz_model
+  - cmd: /fuzz_model_no_inst @@
+    libfuzzer: false
