@@ -1,0 +1,15 @@
+# Ported from the pre-two-branch integration (archive/original-main:
+# mayhem/fuzz_model.mayhemfile). Same target name and harness (upstream
+# fuzz/fuzz_targets/fuzz_model.rs). The old non-instrumented duplicate cmd
+# (/fuzz_model_no_inst) is dropped — one sanitized libFuzzer cmd per target.
+project: marble
+target: fuzz-model
+
+cmds:
+  # libFuzzer binary; Mayhem feeds inputs on stdin (no @@ = stdin input).
+  # cwd is /tmp because the harness creates its scratch store under
+  # ./testing_data_directories relative to the CWD, and the image dir is
+  # mounted read-only during coverage collection.
+  - cmd: /mayhem/fuzz_model
+    cwd: /tmp
+    libfuzzer: true
